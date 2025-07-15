@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotwire Demo</title>
+    <script type="module" src="https://unpkg.com/@hotwired/turbo@7.3.0/dist/turbo.es2017-esm.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .demo-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #time, #counter {
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+
+        #reset-btn{
+            background-color: #b77373;
+        }
+
+        #reset-btn:hover{
+            background-color: #8c4747;
+        }
+
+        a{
+            text-decoration: none;;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hotwire Turbo Demo</h1>
+    
+    <div class="demo-section">
+        <h2>Live Time Updates</h2>
+        <p>This section updates every time you click the button using Turbo Frames:</p>
+        <turbo-frame id="time">
+            <div id="time">Current time: Click the button to load</div>
+        </turbo-frame>
+        <a href="/time" data-turbo-frame="time">
+            <button>Get Current Time</button>
+        </a>
+    </div>
+
+    <div class="demo-section">
+        <h2>Counter Example</h2>
+        <p>This counter increments using Turbo Frames:</p>
+        <turbo-frame id="counter">
+            <div id="counter">Count: 0</div>
+        </turbo-frame>
+        <a href="/increment?count=0" data-turbo-frame="counter" id="increment-btn">
+            <button>Increment Counter</button>
+        </a>
+            <a href="/reset-counter" data-turbo-frame="counter">
+                <button id="reset-btn">Reset Counter</button>
+        </a>
+    </div>
+
+    <div class="demo-section">
+        <h2>Form Example</h2>
+        <p>This form submits using Turbo Streams:</p>
+        <form action="/submit" method="post" data-turbo-frame="form-response">
+            <input type="text" name="name" placeholder="Enter your name">
+            <button type="submit">Submit</button>
+        </form>
+        <turbo-frame id="form-response">
+            <div id="form-response">Form response will appear here</div>
+        </turbo-frame>
+    </div>
+
+    <div class="demo-section">
+        <h2>Turbo Stream Example</h2>
+        <form action="/add" method="POST" data-turbo-stream id="stream-form">
+            <input type="text" name="name" placeholder="Enter a name">
+            <button type="submit">Add</button>
+        </form>
+
+        <ul id="guest_list">
+            <!-- List will be updated via Turbo Stream -->
+        </ul>
+    
+
+    </div>
+
+    <script>
+
+        // increment counter
+        let currentCount = 0;
+        
+        // update the counter link when the counter frame is loaded and the count is set
+        document.addEventListener('turbo:frame-load', function(event) {
+            if (event.target.id === 'counter') {
+                const counterText = event.target.querySelector('#counter').textContent;
+                const match = counterText.match(/Count: (\d+)/);
+                if (match) {
+                    currentCount = parseInt(match[1]);
+                    const incrementBtn = document.getElementById('increment-btn');
+                    incrementBtn.href = `/increment?count=${currentCount}`;
+                }
+            }
+        });
+
+        // clear the name input after adding a name
+        document.addEventListener('turbo:submit-end', function(event) {
+            if (event.target.id === 'stream-form') {
+                const nameInput = event.target.querySelector('input[name="name"]');
+                nameInput.value = '';
+            }
+        });
+
+    </script>
+</body>
+</html>
