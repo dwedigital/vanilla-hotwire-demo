@@ -2,7 +2,7 @@ import time
 
 from flask import Flask, Response, render_template, request
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='assets', static_url_path='/assets')
 
 
 @app.route("/")
