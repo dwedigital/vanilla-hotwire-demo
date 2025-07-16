@@ -62,6 +62,8 @@ The application will start on `http://localhost:5001`
 ```
 hotwire_test
 ├── app.py
+├── assets
+│   └── styles.css
 ├── README.md
 └── templates
     ├── index.html
