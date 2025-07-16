@@ -12,25 +12,21 @@ def index():
 
 @app.route("/time")
 def current_time():
-    return f'<turbo-frame id="time"><div id="time">Current time: {time.strftime("%Y-%m-%d %H:%M:%S")}</div></turbo-frame>'
+    return render_template(
+        "partials/time.html", current_time=time.strftime("%Y-%m-%d %H:%M:%S")
+    )
 
 
 @app.route("/reset-counter")
 def counter():
-    return "<turbo-frame id='counter'><div id='counter'>Count: 0</div></turbo-frame>"
+    return render_template("partials/counter.html", count=0)
 
 
 @app.route("/increment")
 def increment():
     count = request.args.get("count", 0, type=int)
     new_count = count + 1
-    return f'<turbo-frame id="counter"><div id="counter">Count: {new_count}</div></turbo-frame>'
-
-
-@app.route("/submit", methods=["POST"])
-def submit():
-    name = request.form.get("name")
-    return f'<turbo-frame id="form-response"><div id="form-response">Form response: {name}</div></turbo-frame>'
+    return render_template("partials/counter.html", count=new_count)
 
 
 @app.route("/add", methods=["POST"])
@@ -51,7 +47,7 @@ def get_name():
             "Eve Adams",
         ]
         name = random.choice(names)
-    turbo = f'<turbo-stream action="prepend" target="guest_list"><template><li>{name}</li></template></turbo-stream>'
+    turbo = render_template("partials/turbo_stream.html", name=name)
     return Response(turbo, mimetype="text/vnd.turbo-stream.html")
 
 

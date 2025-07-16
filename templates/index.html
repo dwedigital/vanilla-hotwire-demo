@@ -30,7 +30,7 @@
         button:hover {
             background-color: #0056b3;
         }
-        #time, #counter {
+        .output {
             padding: 10px;
             margin: 10px 0;
             background-color: #f8f9fa;
@@ -57,7 +57,7 @@
         <h2>Live Time Updates</h2>
         <p>This section updates every time you click the button using Turbo Frames:</p>
         <turbo-frame id="time">
-            <div id="time">Current time: Click the button to load</div>
+            <div id="time" class="output">Current time: Click the button to load</div>
         </turbo-frame>
         <a href="/time" data-turbo-frame="time">
             <button>Get Current Time</button>
@@ -68,7 +68,7 @@
         <h2>Counter Example</h2>
         <p>This counter increments using Turbo Frames:</p>
         <turbo-frame id="counter">
-            <div id="counter">Count: 0</div>
+            <div id="counter" class="output">Count: 0</div>
         </turbo-frame>
         <a href="/increment?count=0" data-turbo-frame="counter" id="increment-btn">
             <button>Increment Counter</button>
@@ -78,17 +78,6 @@
         </a>
     </div>
 
-    <div class="demo-section">
-        <h2>Form Example</h2>
-        <p>This form submits using Turbo Streams:</p>
-        <form action="/submit" method="post" data-turbo-frame="form-response">
-            <input type="text" name="name" placeholder="Enter your name">
-            <button type="submit">Submit</button>
-        </form>
-        <turbo-frame id="form-response">
-            <div id="form-response">Form response will appear here</div>
-        </turbo-frame>
-    </div>
 
     <div class="demo-section">
         <h2>Turbo Stream Example</h2>
