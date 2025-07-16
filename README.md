@@ -60,11 +60,15 @@ The application will start on `http://localhost:5001`
 ## Project Structure
 
 ```
-hotwire_test/
-├── app.py              # Main Flask application
-├── templates/
-│   └── index.html      # Frontend with Turbo integration
-└── README.md           # This file
+hotwire_test
+├── app.py
+├── README.md
+└── templates
+    ├── index.html
+    └── partials
+        ├── counter.html
+        ├── time.html
+        └── turbo_stream.html
 ```
 
 ## Key Components
