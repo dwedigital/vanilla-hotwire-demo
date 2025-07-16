@@ -4,11 +4,18 @@ body {
     margin: 0 auto;
     padding: 20px;
 }
+
+.container{
+display: flex;
+column-gap: 2rem;
+justify-content: center;
+}
 .demo-section {
     margin: 20px 0;
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 5px;
+    flex: 0 0 300px;
 }
 button {
     background-color: #007bff;
