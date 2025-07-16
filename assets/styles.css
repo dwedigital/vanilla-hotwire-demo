@@ -5,10 +5,10 @@ body {
     padding: 20px;
 }
 
-.container{
-display: flex;
-column-gap: 2rem;
-justify-content: center;
+.container {
+    display: flex;
+    column-gap: 2rem;
+    justify-content: center;
 }
 .demo-section {
     margin: 20px 0;
@@ -35,15 +35,12 @@ button:hover {
     background-color: #f8f9fa;
     border-radius: 5px;
 }
-
-#reset-btn{
+#reset-btn {
     background-color: #a82121;
 }
-
-#reset-btn:hover{
+#reset-btn:hover {
     background-color: #8e1d1d;
 }
-
-a{
-    text-decoration: none;;
+a {
+    text-decoration: none;
 }
